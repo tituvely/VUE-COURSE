@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app">{{doubleNum}}</div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+      new Vue({
+        el: "#app",
+        data: {
+          num: 10,
+        },
+        // vue 공식문서에서는 단순 값 바인딩의 상황에서
+        // watch와 computed 중 computed를 사용할 것을 권장
+        computed: {
+          doubleNum() {
+            console.log("1");
+            console.log("computed");
+            return this.num * 2;
+          },
+        },
+        watch: {
+          num: function (newValue, oldValue) {
+            console.log("2");
+            console.log("watch");
+            console.log(newValue, oldValue);
+            this.fetchUserByNumber(newValue);
+          },
+        },
+        methods: {
+          fetchUserByNumber(num) {
+            console.log(num);
+          },
+        },
+      });
+    </script>
+  </body>
+</html>
