@@ -6,9 +6,11 @@
         :key="todoItem.item"
         class="shadow"
       >
-        <i class="checkBtn fas fa-check"
-        :class="{ checkBtnCompleted: todoItem.completed }"
-        @click="toggleComplete(todoItem)"></i>
+        <i
+          class="checkBtn fas fa-check"
+          :class="{ checkBtnCompleted: todoItem.completed }"
+          @click="toggleComplete(todoItem)"
+        ></i>
         <span :class="{ textCompleted: todoItem.completed }">{{
           todoItem.item
         }}</span>
@@ -22,27 +24,15 @@
 
 <script>
 export default {
-  data() {
-    return {
-      todoItems: [],
-    };
-  },
-  created() {
-    if (localStorage.length > 0) {
-      for (var i = 0; i < localStorage.length; i++) {
-        this.todoItems.push(JSON.parse(localStorage.getItem(localStorage.key(i))));
-      }
-    }
+  props: {
+    todoItems: String,
   },
   methods: {
     toggleComplete(todoItem) {
-      todoItem.completed = !todoItem.completed;
-      localStorage.removeItem(todoItem.item);
-      localStorage.setItem(todoItem.item, JSON.stringify(todoItem));
+      this.$emit('toggleItem', todoItem);
     },
     removeTodo(todoItem, index) {
-      localStorage.removeItem(todoItem);
-      this.todoItems.splice(index, 1);
+      this.$emit('removeItem', todoItem, index);
     },
   },
 };
