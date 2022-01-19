@@ -1,6 +1,9 @@
 <template>
   <div>
-    <div v-for="user in users" :key="user.id">{{ user.title }}</div>
+    <p v-for="item in news" :key="item.id">
+      <a :href="item.url">{{ item.title }}</a>
+      <small>{{ item.time_ago }} by {{ item.user }}</small>
+    </p>
     news
   </div>
 </template>
@@ -10,9 +13,7 @@ import { mapGetters } from "vuex";
 
 export default {
   computed: {
-    ...mapGetters({
-      users: "news",
-    }),
+    ...mapGetters(["news"]),
   },
   created() {
     this.$store.dispatch("FETCH_NEWS");
