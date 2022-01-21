@@ -24,6 +24,19 @@ body {
   padding: 0;
 }
 
+a {
+  color: #34495e;
+  text-decoration: none;
+}
+
+a:hover {
+  color: yellowgreen;
+}
+
+a.router-link-exact-active {
+  text-decoration: underline;
+}
+
 /* Router Transition */
 .page-enter-active,
 .page-leave-active {
