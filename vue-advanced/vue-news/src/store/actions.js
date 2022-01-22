@@ -4,6 +4,7 @@ import {
   fetchNewsList,
   fetchUserInfo,
   fetchItem,
+  fetchList,
 } from "../api/index";
 
 export default {
@@ -24,5 +25,8 @@ export default {
   },
   FETCH_ITEM({ commit }, itemId) {
     fetchItem(itemId).then(({ data }) => commit("SET_ITEM", data));
+  },
+  FETCH_LIST({ commit }, pageName) {
+    fetchList(pageName).then(({ data }) => commit("SET_LIST", data));
   },
 };
