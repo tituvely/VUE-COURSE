@@ -8,7 +8,10 @@ import {
 
 export default {
   FETCH_NEWS({ commit }) {
-    fetchNewsList().then(({ data }) => commit("SET_NEWS", data));
+    fetchNewsList().then(({ data }) => {
+      commit("SET_NEWS", data);
+      return data;
+    });
   },
   FETCH_ASK({ commit }) {
     fetchAskList().then(({ data }) => commit("SET_ASK", data));
