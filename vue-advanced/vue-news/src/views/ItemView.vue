@@ -1,13 +1,10 @@
 <template>
   <div>
     <section>
-      <div class="user-container">
-        <div><i class="fas fa-user"></i></div>
-        <div class="user-description">
-          <router-link :to="`/user/${item.user}`">{{ item.user }}</router-link>
-          <div class="time">{{ item.time_ago }}</div>
-        </div>
-      </div>
+      <UserProfile :user="item">
+        <div slot="username">{{ item.user }}</div>
+        <template slot="time">{{ item.time_ago }}</template>
+      </UserProfile>
       <h2>{{ item.title }}</h2>
     </section>
     <section>
@@ -17,8 +14,12 @@
 </template>
 
 <script>
+import UserProfile from "../components/UserProfile.vue";
 import { mapGetters } from "vuex";
 export default {
+  components: {
+    UserProfile,
+  },
   computed: {
     ...mapGetters(["item"]),
   },
