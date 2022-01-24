@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <button @click="loginUser">login</button>
+    <button @click="loginUser1">login</button>
     <h1>List</h1>
     <ul>
       <li v-for="item in items" :key="item.id">
@@ -34,6 +34,17 @@ export default {
           }
         })
         .catch((error) => console.log(error));
+    },
+    async loginUser1() {
+      let response = await axios.get(
+        "https://jsonplaceholder.typicode.com/users/1"
+      );
+      if (response.data.id === 1) {
+        let list = await axios.get(
+          "https://jsonplaceholder.typicode.com/todos"
+        );
+        this.items = list;
+      }
     },
   },
 };
