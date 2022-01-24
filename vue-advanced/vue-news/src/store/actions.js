@@ -8,40 +8,38 @@ import {
 } from "../api/index";
 
 export default {
-  FETCH_NEWS({ commit }) {
-    return fetchNewsList().then(({ data }) => {
+  async FETCH_NEWS({ commit }) {
+    try {
+      const { data } = await fetchNewsList();
       commit("SET_NEWS", data);
       return data;
-    });
+    } catch (error) {
+      console.error();
+    }
   },
-  FETCH_ASK({ commit }) {
-    return fetchAskList().then(({ data }) => {
-      commit("SET_ASK", data);
-      return data;
-    });
+  async FETCH_ASK({ commit }) {
+    const { data } = await fetchAskList();
+    commit("SET_ASK", data);
+    return data;
   },
-  FETCH_JOBS({ commit }) {
-    return fetchJobList().then(({ data }) => {
-      commit("SET_JOBS", data);
-      return data;
-    });
+  async FETCH_JOBS({ commit }) {
+    const { data } = await fetchJobList();
+    commit("SET_JOBS", data);
+    return data;
   },
-  FETCH_USER({ commit }, username) {
-    return fetchUserInfo(username).then(({ data }) => {
-      commit("SET_USER", data);
-      return data;
-    });
+  async FETCH_USER({ commit }, username) {
+    const { data } = await fetchUserInfo(username);
+    commit("SET_USER", data);
+    return data;
   },
-  FETCH_ITEM({ commit }, itemId) {
-    return fetchItem(itemId).then(({ data }) => {
-      commit("SET_ITEM", data);
-      return data;
-    });
+  async FETCH_ITEM({ commit }, itemId) {
+    const { data } = await fetchItem(itemId);
+    commit("SET_ITEM", data);
+    return data;
   },
-  FETCH_LIST({ commit }, pageName) {
-    return fetchList(pageName).then(({ data }) => {
-      commit("SET_LIST", data);
-      return data;
-    });
+  async FETCH_LIST({ commit }, pageName) {
+    const { data } = await fetchList(pageName);
+    commit("SET_LIST", data);
+    return data;
   },
 };
