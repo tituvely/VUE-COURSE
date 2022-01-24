@@ -12,6 +12,7 @@
 
 <script>
 import axios from "axios";
+import handleException from "./utils/handler";
 
 export default {
   data() {
@@ -36,14 +37,18 @@ export default {
         .catch((error) => console.log(error));
     },
     async loginUser1() {
-      let response = await axios.get(
-        "https://jsonplaceholder.typicode.com/users/1"
-      );
-      if (response.data.id === 1) {
-        let list = await axios.get(
-          "https://jsonplaceholder.typicode.com/todos"
+      try {
+        let response = await axios.get(
+          "https://jsonplaceholder.typicode.com/users/1"
         );
-        this.items = list;
+        if (response.data.id === 1) {
+          let list = await axios.get(
+            "https://jsonplaceholder.typicode.com/todos"
+          );
+          this.items = list;
+        }
+      } catch (error) {
+        handleException(error);
       }
     },
   },
