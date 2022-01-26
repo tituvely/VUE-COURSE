@@ -1,11 +1,16 @@
 <template>
-  <input type="checkbox" v-model="checked" />
+  <input type="checkbox" :value="value" @click="toggleCheck" />
 </template>
 
 <script>
 export default {
   props: {
-    checked: Boolean,
+    value: Boolean,
+  },
+  methods: {
+    toggleCheck() {
+      this.$emit("input", !this.value);
+    },
   },
 };
 </script>
