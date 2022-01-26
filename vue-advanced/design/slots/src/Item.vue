@@ -1,11 +1,15 @@
 <template>
   <div>
-    <li><slot></slot></li>
+    <li>{{ item }}</li>
   </div>
 </template>
 
 <script>
-export default {};
+export default {
+  props: {
+    item: String,
+  },
+};
 </script>
 
 <style>
