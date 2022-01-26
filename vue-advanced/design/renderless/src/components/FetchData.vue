@@ -1,32 +1,31 @@
 <script>
-// import axios from "axios";
+import axios from "axios";
 
 export default {
   props: ["url"],
   data() {
     return {
       response: null,
-      loading: false,
+      loading: true,
     };
   },
   created() {
-    // axios
-    //   .get("this.url")
-    //   .then((response) => {
-    //     this.response = response.data;
-    //     this.loading = true;
-    //   })
-    //   .catch((error) => {
-    //     alert("[ERROR] fetching the data", error);
-    //     console.error();
-    //   });
+    axios
+      .get(this.url)
+      .then((response) => {
+        this.response = response.data;
+        this.loading = false;
+      })
+      .catch((error) => {
+        alert("[ERROR] fetching the data", error);
+        console.error();
+      });
   },
-  render(createElement) {
-    return createElement("p", "HELLO");
-    // return this.$scopedSlots.default({
-    //   response: this.response,
-    //   loading: this.loading,
-    // });
+  render() {
+    return this.$scopedSlots.default({
+      response: this.response,
+      loading: this.loading,
+    });
   },
 };
 </script>
