@@ -25,13 +25,19 @@ export default {
   },
   methods: {
     async submitForm() {
-      const userData = {
-        username: this.username,
-        password: this.password,
-      };
-      const { data } = await loginUser(userData);
-      this.logMessage = `${data.user.username} 님이 가입되었습니다.`;
-      this.initForm();
+      try {
+        const userData = {
+          username: this.username,
+          password: this.password,
+        };
+        const { data } = await loginUser(userData);
+        this.logMessage = `${data.user.username} 님이 가입되었습니다.`;
+      } catch (error) {
+        console.log(error.response);
+        this.logMessage = error.response.data;
+      } finally {
+        this.initForm();
+      }
     },
     initForm() {
       this.username = '';
