@@ -2,8 +2,9 @@ import { shallowMount } from '@vue/test-utils';
 import LoginForm from './LoginForm.vue';
 
 describe('LoginForm.vue', () => {
-  test('should render', () => {
+  test('ID는 이메일 형식이어야 한다', () => {
     const wrapper = shallowMount(LoginForm);
-    expect(wrapper.vm.username).toBe('');
+    const idInput = wrapper.find('#username');
+    console.log(idInput.html());
   });
 });
