@@ -1,17 +1,31 @@
 <template>
   <li>
-    <div class="post-title">{{ item.title }}</div>
-    <div class="post-contents">{{ item.contents }}</div>
-    <div class="post-time">{{ item.createdAt }}</div>
+    <div class="post-title">{{ postItem.title }}</div>
+    <div class="post-contents">{{ postItem.contents }}</div>
+    <div class="post-time">
+      {{ postItem.createdAt }}
+      <i class="icon ion-md-create"></i>
+      <i class="icon ion-md-trash" @click="deleteItem"></i>
+    </div>
   </li>
 </template>
 
 <script>
+import { deletePost } from '@/api/posts';
+
 export default {
   props: {
-    item: {
+    postItem: {
       type: Object,
       required: true,
+    },
+  },
+  methods: {
+    async deleteItem() {
+      if (confirm('You want to delete it?')) {
+        await deletePost(this.postItem._id);
+        this.$emit('refresh');
+      }
     },
   },
 };
